@@ -27,7 +27,7 @@ yo react-client myproject
 npm i && npm run demo
 ``` 
 
-#### Build to production|stage
+#### Build package
 ```bash
 npm run build
 ```
