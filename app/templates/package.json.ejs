@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "prepublishOnly": "NODE_ENV=production webpack --progress",
-    "demo": "webpack-dev-server"
+    "build": "NODE_ENV=production webpack --progress",
+    "demo": "webpack-dev-server",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "prop-types": "^15.6.0",
