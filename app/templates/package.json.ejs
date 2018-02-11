@@ -5,8 +5,12 @@
   "scripts": {
     "build": "NODE_ENV=production webpack --progress",
     "demo": "webpack-dev-server",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "postpublish": "rm -R dist"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
