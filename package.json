@@ -1,0 +1,38 @@
+{
+  "name": "generator-react-create-module",
+  "version": "1.0.0",
+  "description": "Generator to provide a development environment to create react modules",
+  "main": "app/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "lodash": "^4.17.5",
+    "yeoman-generator": "^2.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.17.0",
+    "eslint-plugin-react": "^7.6.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wgleen/generator-react-create-module.git"
+  },
+  "keywords": [
+    "yeoman-generator",
+    "react",
+    "module",
+    "component",
+    "npm",
+    "node"
+  ],
+  "author": "Wallace Gleen <wallace.gleen@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wgleen/generator-react-create-module/issues"
+  },
+  "homepage": "https://github.com/wgleen/generator-react-create-module#readme"
+}
