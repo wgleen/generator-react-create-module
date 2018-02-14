@@ -6,7 +6,7 @@ const _envConfig = envConfig[process.env.NODE_ENV || 'development']
 
 export default merge({}, _envConfig, {
   output: {
-    filename: '[name].js'
+    filename: 'index.js'
   },
   module: {
     rules: [

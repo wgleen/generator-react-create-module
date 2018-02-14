@@ -1,13 +1,14 @@
 {
   "name": "<%= appName %>",
   "version": "1.0.0",
-  "description": "",
+  "description": "<%= description %>",
   "scripts": {
-    "build": "NODE_ENV=production webpack --progress",
+    "build": "NODE_ENV=production webpack --progress -p",
     "demo": "webpack-dev-server",
     "prepublishOnly": "npm run build",
     "postpublish": "rm -R dist"
   },
+  "main": "dist/index.js",
   "files": [
     "dist"
   ],
@@ -16,11 +17,14 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
+  "keywords": ["react"],
+  "author": "<%= author %>",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.9",
     "eslint": "^4.17.0",
     "eslint-plugin-react": "^7.6.1",

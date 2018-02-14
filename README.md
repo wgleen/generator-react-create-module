@@ -7,13 +7,13 @@ First, install [Yeoman](http://yeoman.io) and generator-react-client using [npm]
 
 ```bash
 npm install -g yo
-npm install -g generator-react-client
+npm install -g generator-react-create-module
 ```
 
 Then generate your new project:
 
 ```bash
-yo react-client myproject
+yo react-create-module mymodule
 ```
 
 ### Project Documentation

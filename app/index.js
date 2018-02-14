@@ -16,6 +16,16 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'appName',
         message: `Enter a name for the application ${this.appName ? `or keep ${this.appName}` : ''}`
+      },
+      {
+        type: 'input',
+        name: 'description',
+        message: 'Enter with project description'
+      },
+      {
+        type: 'input',
+        name: 'author',
+        message: 'Enter with project description'
       }
     ])
     .then(answers => {
@@ -40,7 +50,11 @@ module.exports = class extends Generator {
       this.fs.copyTpl(
         this.templatePath(`${templatePath}package.json.ejs`),
         this.destinationPath(`${destinationPath}package.json`),
-        { appName: _appName }
+        {
+          appName: _appName,
+          description: this.description,
+          author: this.author
+        }
       )
 
       this.fs.copy(
