@@ -25,7 +25,7 @@ module.exports = class extends Generator {
       {
         type: 'input',
         name: 'author',
-        message: 'Enter with project description'
+        message: 'Enter with project author'
       }
     ])
     .then(answers => {
