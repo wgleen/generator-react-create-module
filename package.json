@@ -1,6 +1,6 @@
 {
   "name": "generator-react-create-module",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Generator to provide a development environment to create react modules",
   "main": "app/index.js",
   "directories": {
