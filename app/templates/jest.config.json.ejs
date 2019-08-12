@@ -1,0 +1,46 @@
+{
+  "name": "<%= appName %>",
+  "verbose": true,
+  "setupFilesAfterEnv": [
+    "./node_modules/jest-enzyme/lib/index.js",
+    "./test/setup.js"
+  ],
+  "testEnvironment": "enzyme",
+  "snapshotSerializers": [
+    "enzyme-to-json/serializer"
+  ],
+  "setupFiles": [
+    "jest-prop-type-error",
+    "./test/helpers.js"
+  ],
+  "moduleNameMapper": {
+    "\\.(css|scss)$": "identity-obj-proxy"
+  },
+  "globals": {
+    "NODE_ENV": "test"
+  },
+  "transform": {
+    "^.+\\.jsx?$": "babel-jest",
+    "\\.(svg|png)$": "<rootDir>/test/fileTransformer.js"
+  },
+  "collectCoverageFrom": [
+    "src/**/*.js"
+  ],
+  "coverageReporters": [
+    "json-summary",
+    "text",
+    "html",
+    "lcov"
+  ],
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "/config/",
+    "/demo/"
+  ],
+  "coverageDirectory": "coverage",
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "/config/",
+    "/demo/"
+  ]
+}

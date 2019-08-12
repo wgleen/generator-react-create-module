@@ -53,6 +53,12 @@ module.exports = class extends Generator {
       )
 
       this.fs.copyTpl(
+        this.templatePath(`${templatePath}jest.config.json.ejs`),
+        this.destinationPath(`${destinationPath}jest.config.json`),
+        { appName: _appName }
+      )
+
+      this.fs.copyTpl(
         this.templatePath(`${templatePath}package.json.ejs`),
         this.destinationPath(`${destinationPath}package.json`),
         {
