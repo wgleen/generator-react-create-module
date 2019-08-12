@@ -1,10 +1,14 @@
 import webpack from 'webpack'
 import merge from 'webpack-merge'
-import envConfig from './config/webpackEnvs'
+import config from './config'
+import {
+  development,
+  production
+} from './config/webpackEnvs'
 
-const _envConfig = envConfig[process.env.NODE_ENV || 'development']
+const envConfig = config.env.match(/development|test/) ? development : production
 
-export default merge({}, _envConfig, {
+export default merge({}, envConfig, {
   output: {
     filename: 'index.js'
   },

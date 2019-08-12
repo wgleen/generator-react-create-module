@@ -3,7 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import config from './index'
 
-const development = {
+export const development = {
   entry: './demo/index.js',
   devServer: {
     historyApiFallback: true,
@@ -28,7 +28,7 @@ const development = {
           'sass-loader'
         ]
       }
-    ] 
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -39,7 +39,7 @@ const development = {
   ]
 }
 
-const production = {
+export const production = {
   entry: './src/index.js',
   output: {
     path: `${config.paths.root}dist`,
@@ -75,9 +75,4 @@ const production = {
     }),
     new ExtractTextPlugin('[name].css')
   ]
-}
-
-export default {
-  development,
-  production
 }
