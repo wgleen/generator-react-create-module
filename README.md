@@ -10,13 +10,13 @@ npm install -g yo
 npm install -g generator-react-create-module
 ```
 
-Then generate your new project:
+Then generate your new module:
 
 ```bash
 yo react-create-module mymodule
 ```
 
-### Project Documentation
+### Module Documentation
 ---
 #### Requirements
 - Node
