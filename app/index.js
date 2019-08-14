@@ -88,10 +88,10 @@ module.exports = class extends Generator {
         this.destinationPath(`${destinationPath}index.js`)
       )
 
-      // Demo files
+      // Dev files
 
-      destinationPath = `${_appName}/demo/`
-      templatePath = 'demo/'
+      destinationPath = `${_appName}/dev/`
+      templatePath = 'dev/'
 
       this.fs.copyTpl(
         this.templatePath(`${templatePath}App.jsx.ejs`),
@@ -110,6 +110,11 @@ module.exports = class extends Generator {
         this.destinationPath(`${destinationPath}index.js`)
       )
 
+      this.fs.copy(
+        this.templatePath(`${templatePath}store.js`),
+        this.destinationPath(`${destinationPath}store.js`)
+      )
+
       // Src files
 
       destinationPath = `${_appName}/src/`
@@ -118,6 +123,16 @@ module.exports = class extends Generator {
       this.fs.copy(
         this.templatePath(`${templatePath}index.js`),
         this.destinationPath(`${destinationPath}index.js`)
+      )
+
+      // Test
+
+      destinationPath = `${_appName}/test/`
+      templatePath = 'test/'
+
+      this.fs.copy(
+        this.templatePath(`${templatePath}`),
+        this.destinationPath(`${destinationPath}`)
       )
     })
   }

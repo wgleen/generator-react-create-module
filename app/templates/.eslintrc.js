@@ -29,6 +29,7 @@ module.exports = {
 		"react"
 	],
 	"rules": {
+		"semi": [2, "never"],
 		"no-underscore-dangle": "off",
 		"react/jsx-uses-vars": "error",
 		"react/jsx-uses-react": "error",

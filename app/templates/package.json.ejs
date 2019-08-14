@@ -6,7 +6,7 @@
     "build": "NODE_ENV=production webpack --progress -p",
     "lint": "eslint src/**/*.{js,jsx,spec.js}",
     "test": "NODE_ENV=test ENV=test jest --config jest.config.json -u --passWithNoTests --detectOpenHandles",
-    "demo": "webpack-dev-server",
+    "dev": "webpack-dev-server",
     "prepublishOnly": "npm run build",
     "postpublish": "rm -R dist"
   },
@@ -17,7 +17,8 @@
   "dependencies": {
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "redux": "^4.0.4"
   },
   "keywords": ["react"],
   "author": "<%= author %>",
@@ -30,7 +31,9 @@
     "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
+    "chai": "^4.2.0",
     "css-loader": "^0.28.9",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
@@ -52,6 +55,12 @@
     "jsdom-global": "^3.0.2",
     "lodash": "^4.17.5",
     "node-sass": "^4.7.2",
+    "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-mock-store": "^1.5.3",
+    "redux-multi": "^0.1.12",
+    "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.3.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.20.1",
     "webpack": "^3.11.0",

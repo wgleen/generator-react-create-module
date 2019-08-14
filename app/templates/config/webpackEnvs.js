@@ -1,10 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import config from './index'
 
 export const development = {
-  entry: './demo/index.js',
+  entry: './dev/index.js',
   devServer: {
     historyApiFallback: true,
     hot: true,
@@ -32,10 +33,10 @@ export const development = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './demo/index.html',
+      template: './dev/index.html',
       inject: 'body',
       filename: 'index.html'
-    }),
+    })
   ]
 }
 
