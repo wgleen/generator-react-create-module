@@ -1,5 +1,6 @@
 import webpack from 'webpack'
 import merge from 'webpack-merge'
+import './dotenv'
 import config from './config'
 import {
   development,
