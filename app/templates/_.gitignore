@@ -13,7 +13,7 @@ node_modules/
 package-lock.json
 
 # Webpack output
-dist
+lib
 
 # Editor
 .vscode

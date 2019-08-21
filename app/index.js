@@ -110,6 +110,12 @@ module.exports = class extends Generator {
       this.destinationPath(`${destinationPath}postcss.config.js`)
     )
 
+    this.fs.copyTpl(
+      this.templatePath(`${templatePath}rollup.config.js.ejs`),
+      this.destinationPath(`${destinationPath}rollup.config.js`),
+      { appTitle: helpers.toCamel(appName) }
+    )
+
     this.fs.copy(
       this.templatePath(`${templatePath}webpack.config.babel.js`),
       this.destinationPath(`${destinationPath}webpack.config.babel.js`)
@@ -137,13 +143,8 @@ module.exports = class extends Generator {
     templatePath = 'config/'
 
     this.fs.copy(
-      this.templatePath(`${templatePath}webpackEnvs.js`),
-      this.destinationPath(`${destinationPath}webpackEnvs.js`)
-    )
-
-    this.fs.copy(
-      this.templatePath(`${templatePath}index.js`),
-      this.destinationPath(`${destinationPath}index.js`)
+      this.templatePath(`${templatePath}`),
+      this.destinationPath(`${destinationPath}`)
     )
 
     // Dev files
