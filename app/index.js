@@ -5,8 +5,6 @@ module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts)
 
-
-
     this.argument('appName', {
       type: String,
       required: true
@@ -117,6 +115,22 @@ module.exports = class extends Generator {
       this.destinationPath(`${destinationPath}webpack.config.babel.js`)
     )
 
+    // Storybook
+
+    destinationPath = `${appName}/.storybook/`
+    templatePath = '.storybook/'
+
+    this.fs.copyTpl(
+      this.templatePath(`${templatePath}config.js.ejs`),
+      this.destinationPath(`${destinationPath}config.js`),
+      { appTitle }
+    )
+
+    this.fs.copy(
+      this.templatePath(`${templatePath}webpack.config.babel.js`),
+      this.destinationPath(`${destinationPath}webpack.config.babel.js`)
+    )
+
     // Config files
 
     destinationPath = `${appName}/config/`
@@ -140,13 +154,13 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath(`${templatePath}App.jsx.ejs`),
       this.destinationPath(`${destinationPath}App.jsx`),
-      { appName: appTitle }
+      { appTitle }
     )
 
     this.fs.copyTpl(
       this.templatePath(`${templatePath}index.html.ejs`),
       this.destinationPath(`${destinationPath}index.html`),
-      { appName: appTitle }
+      { appTitle }
     )
 
     this.fs.copy(
@@ -165,8 +179,8 @@ module.exports = class extends Generator {
     templatePath = 'src/'
 
     this.fs.copy(
-      this.templatePath(`${templatePath}index.js`),
-      this.destinationPath(`${destinationPath}index.js`)
+      this.templatePath(`${templatePath}`),
+      this.destinationPath(`${destinationPath}`)
     )
 
     // Test

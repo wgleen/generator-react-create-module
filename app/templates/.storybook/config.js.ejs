@@ -1,0 +1,34 @@
+import {
+  configure,
+  addParameters,
+  addDecorator
+} from '@storybook/react'
+import '@storybook/addon-options/register'
+import { create } from '@storybook/theming'
+import { withInfo } from '@storybook/addon-info'
+
+const customTheme = create({
+  base: 'light',
+  brandTitle: '<%= appTitle %>',
+  brandUrl: '',
+  brandImage: ''
+})
+
+addParameters({
+  options: {
+    name: '<%= appTitle %>',
+    showAddonPanel: false,
+    theme: customTheme
+  }
+})
+
+addDecorator(withInfo({
+  inline: true
+}))
+
+const req = require.context('../src', true, /\.stories\.js$/)
+const loadStories = () => {
+  req.keys().forEach(filename => req(filename))
+}
+
+configure(loadStories, module)
