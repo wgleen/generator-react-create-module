@@ -30,6 +30,17 @@ module.exports = class extends Generator {
         name: 'appAuthor',
         message: 'Enter with project author',
         default: ''
+      },
+      {
+        type: 'input',
+        name: 'gitlab',
+        message: 'Gitlab resources? (y|n)'
+      },
+      {
+        when: (answers) => answers.gitlab === 'y',
+        type: 'input',
+        name: 'gitlabGroupOrUser',
+        message: 'Gitlab group or user?'
       }
     ])
 
@@ -37,8 +48,18 @@ module.exports = class extends Generator {
 
     const {
       appDescription,
-      appAuthor
+      appAuthor,
+      gitlab,
+      gitlabGroupOrUser
     } = this.answers
+
+    this.appName = appName
+    this.appDescription = appDescription
+    this.appAuthor = appAuthor
+    this.appTitle = helpers.toTitle(appName)
+    this.gitlab = gitlab === 'y'
+    this.gitlabGroupOrUser = gitlabGroupOrUser
+    this.gitlabRepo = `https://gitlab.com/${gitlabGroupOrUser}/${appName}`
 
     this.log('App name: ', appName)
     this.log('App description: ', appDescription)
@@ -46,10 +67,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    const { appName } = this.options
-    const appTitle = helpers.toTitle(appName)
-
-    let destinationPath = `${appName}/`
+    let destinationPath = `${this.appName}/`
     let templatePath = ''
 
     // Root files
@@ -89,19 +107,26 @@ module.exports = class extends Generator {
       this.destinationPath(`${destinationPath}dotenv.js`)
     )
 
+    if (this.gitlab) {
+      this.fs.copy(
+        this.templatePath(`${templatePath}gitlab-ci.yml`),
+        this.destinationPath(`${destinationPath}gitlab-ci.yml`)
+      )
+    }
+
     this.fs.copyTpl(
       this.templatePath(`${templatePath}jest.config.json.ejs`),
       this.destinationPath(`${destinationPath}jest.config.json`),
-      { appName }
+      { appName: this.appName }
     )
 
     this.fs.copyTpl(
       this.templatePath(`${templatePath}package.json.ejs`),
       this.destinationPath(`${destinationPath}package.json`),
       {
-        appName,
-        description: this.description,
-        author: this.author
+        appName: this.appName,
+        description: this.appDescription,
+        author: this.appAuthor
       }
     )
 
@@ -111,9 +136,20 @@ module.exports = class extends Generator {
     )
 
     this.fs.copyTpl(
+      this.templatePath(`${templatePath}README.md.ejs`),
+      this.destinationPath(`${destinationPath}README.md`),
+      {
+        appTitle: this.appTitle,
+        appName: this.appName,
+        gitlab: this.gitlab,
+        gitlabGroupOrUser: this.gitlabGroupOrUser
+      }
+    )
+
+    this.fs.copyTpl(
       this.templatePath(`${templatePath}rollup.config.js.ejs`),
       this.destinationPath(`${destinationPath}rollup.config.js`),
-      { appTitle: helpers.toCamel(appName) }
+      { appTitle: helpers.toCamel(this.appName) }
     )
 
     this.fs.copy(
@@ -123,13 +159,13 @@ module.exports = class extends Generator {
 
     // Storybook
 
-    destinationPath = `${appName}/.storybook/`
+    destinationPath = `${this.appName}/.storybook/`
     templatePath = '.storybook/'
 
     this.fs.copyTpl(
       this.templatePath(`${templatePath}config.js.ejs`),
       this.destinationPath(`${destinationPath}config.js`),
-      { appTitle }
+      { appTitle: this.appTitle }
     )
 
     this.fs.copy(
@@ -139,7 +175,7 @@ module.exports = class extends Generator {
 
     // Config files
 
-    destinationPath = `${appName}/config/`
+    destinationPath = `${this.appName}/config/`
     templatePath = 'config/'
 
     this.fs.copy(
@@ -149,19 +185,19 @@ module.exports = class extends Generator {
 
     // Dev files
 
-    destinationPath = `${appName}/dev/`
+    destinationPath = `${this.appName}/dev/`
     templatePath = 'dev/'
 
     this.fs.copyTpl(
       this.templatePath(`${templatePath}App.jsx.ejs`),
       this.destinationPath(`${destinationPath}App.jsx`),
-      { appTitle }
+      { appTitle: this.appTitle }
     )
 
     this.fs.copyTpl(
       this.templatePath(`${templatePath}index.html.ejs`),
       this.destinationPath(`${destinationPath}index.html`),
-      { appTitle }
+      { appTitle: this.appTitle }
     )
 
     this.fs.copy(
@@ -176,7 +212,7 @@ module.exports = class extends Generator {
 
     // Src files
 
-    destinationPath = `${appName}/src/`
+    destinationPath = `${this.appName}/src/`
     templatePath = 'src/'
 
     this.fs.copy(
@@ -186,7 +222,7 @@ module.exports = class extends Generator {
 
     // Test
 
-    destinationPath = `${appName}/test/`
+    destinationPath = `${this.appName}/test/`
     templatePath = 'test/'
 
     this.fs.copy(

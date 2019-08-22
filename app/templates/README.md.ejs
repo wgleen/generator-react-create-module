@@ -1,0 +1,158 @@
+<%= appTitle %>
+===================
+<% if (gitlab) { %>
+Builds Status
+=============
+
+## Master:
+[![pipeline status](https://gitlab.com/<%= gitlabGroupOrUser %>/<%= appName %>/badges/master/pipeline.svg)](https://gitlab.com/<%= gitlabGroupOrUser %>/<%= appName %>/commits/master)
+
+## Development:
+[![pipeline status](https://gitlab.com/<%= gitlabGroupOrUser %>/<%= appName %>/badges/development/pipeline.svg)](https://gitlab.com/<%= gitlabGroupOrUser %>/<%= appName %>/commits/development)
+
+Test Coverage
+=============
+
+## Master:
+[![coverage report](https://gitlab.com/<%= gitlabGroupOrUser %>/<%= appName %>/badges/master/coverage.svg)](https://gitlab.com/<%= gitlabGroupOrUser %>/<%= appName %>/commits/master)
+
+## Development:
+[![coverage report](https://gitlab.com/<%= gitlabGroupOrUser %>/<%= appName %>/badges/development/coverage.svg)](https://gitlab.com/<%= gitlabGroupOrUser %>/<%= appName %>/commits/development)
+<% } %>
+---
+
+Documentation
+=============
+
+## Requirements
+- nvm v0.34.0 ([install details](https://github.com/nvm-sh/nvm#installation-and-update))
+- Node v9.9.0 ([install details](https://github.com/nvm-sh/nvm#nvmrc))
+- npm v5.6.0
+
+## Stack
+- Node
+- Webpack
+- Rollup
+- Storybook
+- ES6 (Babel)
+- React
+- Redux / Redux
+- PostCSS / SASS
+- Jest / Enzyme / Chai
+
+---
+
+## Environment Variables
+
+### Application variables
+Set Application variables in the .env file
+- NODE_ENV
+- ENV
+- NPM_TOKEN (token do publish in npm)
+
+## Initialization
+
+```bash
+git clone git@gitlab.com:<%= gitlabGroupOrUser %>/<%= appName %>.git
+cd <%= appName %>/
+cp .env.sample .env
+npm i
+npm run dev
+```
+
+---
+
+## Build
+
+### Build library to production
+
+```bash
+npm run build
+```
+output path `/lib`
+
+## Storybook
+
+Use storybook to document library components
+see more details in [storybook documentation](https://storybook.js.org/docs/basics/introduction/)
+
+### Initialize storybook server
+
+```bash
+npm run storybook
+```
+
+### build storybook static
+
+```bash
+npm run build-storybook
+```
+output path `/storybook-static`
+
+---
+
+## Testing
+
+### Using jest with enzyme and chai (see examples on `./src/**/*.spec.js`)
+
+```bash
+npm test
+npm run test:coverage
+```
+
+---
+
+## Linting
+
+### Using eslint
+
+```bash
+npm run lint
+```
+
+---
+
+## Deploy
+
+### NPM package
+
+#### Locally
+
+Logged in at NPM with your user
+
+Build the library
+
+```bash
+npm run build
+```
+
+Update package version:
+
+```bash
+npm version major | minor | patch
+```
+see more details in [npm-version](https://docs.npmjs.com/cli/version)
+
+Publish the package
+
+```bash
+npm publish
+```
+<% if (gitlab) { %>
+#### With Gitlab CI
+
+Set the npm token on gitlab ci environment variable `NPM_TOKEN`
+
+Before commit, update package version:
+
+```bash
+npm version major | minor | patch
+```
+see more details in [npm-version](https://docs.npmjs.com/cli/version)
+
+After than, commit to branch master:
+
+```
+git push origin master
+```
+<% } %>
