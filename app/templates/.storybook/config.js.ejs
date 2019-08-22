@@ -6,6 +6,8 @@ import {
 import '@storybook/addon-options/register'
 import { create } from '@storybook/theming'
 import { withInfo } from '@storybook/addon-info'
+import { merge } from 'lodash'
+import StoriesContainer from '../src/components/StoriesContainer/StoriesContainer'
 
 const customTheme = create({
   base: 'light',
@@ -23,7 +25,13 @@ addParameters({
 })
 
 addDecorator(withInfo({
-  inline: true
+  inline: true,
+  propTablesExclude: [StoriesContainer],
+  styles: stylesheet => merge({}, stylesheet, {
+    infoBody: {
+      border: 'none'
+    }
+  })
 }))
 
 const req = require.context('../src', true, /\.stories\.js$/)
