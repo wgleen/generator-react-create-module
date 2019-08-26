@@ -1,16 +1,20 @@
 import {
   configure,
   addParameters,
-  addDecorator
 } from '@storybook/react'
-import '@storybook/addon-options/register'
 import { create } from '@storybook/theming'
-import { withInfo } from '@storybook/addon-info'
-import { merge } from 'lodash'
-import StoriesContainer from '../src/components/StoriesContainer/StoriesContainer'
+import { setDefaults } from '@storybook/addon-info'
+import {
+  merge,
+  remove
+} from 'lodash'
+import '../src/components/Welcome/welcome.stories'
+import StoriesContainer from '../src/components/Stories/StoriesContainer'
+import StoriesStyled from '../src/components/Stories/StoriesStyled'
 
 const customTheme = create({
   base: 'light',
+  fontBase: "'Poppins', sans-serif",
   brandTitle: '<%= appTitle %>',
   brandUrl: '',
   brandImage: ''
@@ -19,24 +23,55 @@ const customTheme = create({
 addParameters({
   options: {
     name: '<%= appTitle %>',
-    showAddonPanel: false,
-    theme: customTheme
+    showPanel: true,
+    panelPosition: 'right',
+    theme: customTheme,
+    sortStoriesByKind: true,
+    hierarchySeparator: null
   }
 })
 
-addDecorator(withInfo({
+const textColorPrimary = '#313136'
+const textColorSecundary = '#313136'
+
+setDefaults({
   inline: true,
-  propTablesExclude: [StoriesContainer],
+  propTablesExclude: [
+    StoriesContainer,
+    StoriesStyled
+  ],
   styles: stylesheet => merge({}, stylesheet, {
     infoBody: {
-      border: 'none'
+      fontFamily: "'Poppins', sans-serif",
+      border: 'none',
+      h1: {
+        color: textColorPrimary
+      },
+    },
+    header: {
+      h1: {
+        color: textColorPrimary
+      },
+      h2: {
+        color: textColorSecundary
+      }
+    },
+    source: {
+      h1: {
+        color: textColorPrimary
+      },
+    },
+    propTableHead: {
+      color: textColorSecundary
     }
   })
-}))
+})
 
 const req = require.context('../src', true, /\.stories\.js$/)
-const loadStories = () => {
-  req.keys().forEach(filename => req(filename))
-}
+const keys = req.keys()
+
+remove(keys, (filename) => filename == './components/Welcome/welcome.stories.js')
+
+const loadStories = () => keys.forEach(filename => req(filename))
 
 configure(loadStories, module)

@@ -162,6 +162,11 @@ module.exports = class extends Generator {
     destinationPath = `${this.appName}/.storybook/`
     templatePath = '.storybook/'
 
+    this.fs.copy(
+      this.templatePath(`${templatePath}addons.js`),
+      this.destinationPath(`${destinationPath}addons.js`)
+    )
+
     this.fs.copyTpl(
       this.templatePath(`${templatePath}config.js.ejs`),
       this.destinationPath(`${destinationPath}config.js`),
@@ -210,10 +215,46 @@ module.exports = class extends Generator {
       this.destinationPath(`${destinationPath}store.js`)
     )
 
-    // Src files
+    // Src
 
     destinationPath = `${this.appName}/src/`
     templatePath = 'src/'
+
+    this.fs.copy(
+      this.templatePath(`${templatePath}index.js`),
+      this.destinationPath(`${destinationPath}index.js`)
+    )
+
+    // Src Components
+
+    destinationPath = `${this.appName}/src/components/`
+    templatePath = 'src/components/'
+
+    this.fs.copy(
+      this.templatePath(`${templatePath}Button/`),
+      this.destinationPath(`${destinationPath}Button/`)
+    )
+
+    this.fs.copy(
+      this.templatePath(`${templatePath}Stories/`),
+      this.destinationPath(`${destinationPath}Stories/`)
+    )
+
+    this.fs.copyTpl(
+      this.templatePath(`${templatePath}Welcome/Welcome.jsx.ejs`),
+      this.destinationPath(`${destinationPath}Welcome/Welcome.jsx`),
+      { appTitle: this.appTitle }
+    )
+
+    this.fs.copy(
+      this.templatePath(`${templatePath}Welcome/welcome.stories.js`),
+      this.destinationPath(`${destinationPath}Welcome/welcome.stories.js`)
+    )
+
+    // Src Styles
+
+    destinationPath = `${this.appName}/src/styles/`
+    templatePath = 'src/styles/'
 
     this.fs.copy(
       this.templatePath(`${templatePath}`),

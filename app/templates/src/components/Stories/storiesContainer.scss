@@ -1,7 +1,7 @@
 .storiesContainer {
   margin: 0 40px;
 
-  & > *:not(:last-child) {
+  & > :not(:last-child) {
     margin-right: 16px;
   }
 }
