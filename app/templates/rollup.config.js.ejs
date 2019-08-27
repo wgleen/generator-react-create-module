@@ -2,6 +2,7 @@ import replace from 'rollup-plugin-replace'
 import postcss from 'rollup-plugin-postcss'
 import babel from 'rollup-plugin-babel'
 import resolve from 'rollup-plugin-node-resolve'
+import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import { sizeSnapshot } from 'rollup-plugin-size-snapshot'
 // import { terser } from 'rollup-plugin-terser'
 import commonjs from 'rollup-plugin-commonjs'
@@ -11,7 +12,7 @@ export default {
   output: {
     name: '<%= appTitle %>',
     file: 'lib/index.js',
-    format: 'umd'
+    format: 'esm'
   },
   plugins: [
     replace({
@@ -33,6 +34,7 @@ export default {
       extensions: ['.js', '.jsx']
     }),
     sizeSnapshot(),
+    peerDepsExternal(),
     // terser(),
     commonjs()
   ]
