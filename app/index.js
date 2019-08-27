@@ -246,9 +246,10 @@ module.exports = class extends Generator {
       { appTitle: this.appTitle }
     )
 
-    this.fs.copy(
-      this.templatePath(`${templatePath}Welcome/welcome.stories.js`),
-      this.destinationPath(`${destinationPath}Welcome/welcome.stories.js`)
+    this.fs.copyTpl(
+      this.templatePath(`${templatePath}Welcome/welcome.stories.js.ejs`),
+      this.destinationPath(`${destinationPath}Welcome/welcome.stories.js`),
+      { appTitle: helpers.toCamel(this.appName) }
     )
 
     // Src Styles
