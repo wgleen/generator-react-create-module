@@ -146,10 +146,9 @@ module.exports = class extends Generator {
       }
     )
 
-    this.fs.copyTpl(
-      this.templatePath(`${templatePath}rollup.config.js.ejs`),
-      this.destinationPath(`${destinationPath}rollup.config.js`),
-      { appTitle: helpers.toCamel(this.appName) }
+    this.fs.copy(
+      this.templatePath(`${templatePath}rollup.config.js`),
+      this.destinationPath(`${destinationPath}rollup.config.js`)
     )
 
     this.fs.copy(
