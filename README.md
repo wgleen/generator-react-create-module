@@ -1,5 +1,5 @@
 # generator-react-create-module
-> Generator to provide a development environment to create react modules
+> Generator to provide an initial architecture and a development environment to create react modules
 
 ## Installation
 
@@ -25,7 +25,7 @@ yo react-create-module mymodule
 #### Initialization Demo
 ```bash
 npm i && npm run demo
-``` 
+```
 
 #### Build package
 ```bash
