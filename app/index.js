@@ -130,11 +130,6 @@ module.exports = class extends Generator {
       }
     )
 
-    this.fs.copy(
-      this.templatePath(`${templatePath}postcss.config.js`),
-      this.destinationPath(`${destinationPath}postcss.config.js`)
-    )
-
     this.fs.copyTpl(
       this.templatePath(`${templatePath}README.md.ejs`),
       this.destinationPath(`${destinationPath}README.md`),
@@ -218,6 +213,12 @@ module.exports = class extends Generator {
 
     destinationPath = `${this.appName}/src/`
     templatePath = 'src/'
+
+    this.fs.copyTpl(
+      this.templatePath(`${templatePath}browser.js.ejs`),
+      this.destinationPath(`${destinationPath}browser.js`),
+      { appName: this.appName }
+    )
 
     this.fs.copy(
       this.templatePath(`${templatePath}index.js`),
