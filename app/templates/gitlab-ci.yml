@@ -1,4 +1,9 @@
-image: node:stable
+image: node:12.16.1
+
+stages:
+  - lint
+  - tests
+  - deploy
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -9,27 +14,54 @@ before_script:
   - npm install
 
 lint:
-  stage: test
+  stage: list
   script:
     - npm run lint
 
 tests:
-  stage: test
+  stage: tests
   script:
     - npm run test:coverage
+  artifacts:
+    paths:
+      - coverage/
+    expire_in: 3 days
 
-publish:
+publish_npm_production:
   stage: deploy
   script:
     - npm run build
     - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}'>.npmrc
-    - npm run publish
+    - npm publish
   only:
-    - production
+    - master
+    - publish-npm-production
+  artifacts:
+    paths:
+      - lib/
 
-storybook:
+pages:
   stage: deploy
+  dependencies:
+    - tests
+    - lint
   script:
+    - npm run build
     - npm run build-storybook
+    - npm run test:coverage
+    - ls -lah .
+    - echo $PUBLIC_TOKEN
+    - mkdir -p public/$PUBLIC_TOKEN
+    - mv storybook-static/ public/$PUBLIC_TOKEN/docs
+    - mv coverage/ public/$PUBLIC_TOKEN/
+    - mv lib public/$PUBLIC_TOKEN/
+    - mv stats.html public/$PUBLIC_TOKEN/
+  artifacts:
+    paths:
+      - public/
+      - coverage/
+    expire_in: 30 days
   only:
-    - production
+    - master
+    - deploy-pages
+  allow_failure: true
