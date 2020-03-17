@@ -11,7 +11,8 @@
     "test:coverage": "npm test -- --coverage",
     "test:watch": "npm test -- --watch",
     "dev": "webpack-dev-server",
-    "prepublishOnly": "npm run build",
+    "dev:browser": "DEV=browser webpack-dev-server",
+    "prepublishOnly": "npm run build:lib",
     "postpublish": "rm -R lib",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"

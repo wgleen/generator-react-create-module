@@ -3,14 +3,21 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import path from 'path'
 import './dotenv'
 
+const entry = process.env.DEV && `.${process.env.DEV}`
+
 export default {
-  entry: './dev/index.js',
+  entry: `./dev/index${entry}.js`,
   devServer: {
     historyApiFallback: true,
     hot: true,
     compress: true,
     port: 4000,
     contentBase: path.join(__dirname, 'lib')
+  },
+  output: {
+    filename: 'main.[hash].js',
+    path: path.resolve(__dirname, 'dist'),
+    globalObject: 'this'
   },
   module: {
     rules: [

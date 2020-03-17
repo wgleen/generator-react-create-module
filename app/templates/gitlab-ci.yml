@@ -51,6 +51,7 @@ pages:
     - mv storybook-static/ public/$PUBLIC_TOKEN/docs
     - mv coverage/ public/$PUBLIC_TOKEN/
     - mv lib public/$PUBLIC_TOKEN/
+    - mv dist/** public/
     - mv stats.html public/$PUBLIC_TOKEN/
   artifacts:
     paths:

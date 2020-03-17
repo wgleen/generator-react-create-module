@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import App from './components/App/App'
+import Welcome from './components/Welcome/Welcome'
 
 window.onload = () => {
   const elm = window.document.createElement('div')
@@ -12,7 +12,7 @@ window.onload = () => {
   const applicationContainer = document.getElementById('<%= appName %>')
 
   render(
-    <App />,
+    <Welcome />,
     applicationContainer
   )
 }
