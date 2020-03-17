@@ -1,5 +1,6 @@
 import webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import path from 'path'
 import './dotenv'
 
 export default {
@@ -8,7 +9,8 @@ export default {
     historyApiFallback: true,
     hot: true,
     compress: true,
-    port: 4000
+    port: 4000,
+    contentBase: path.join(__dirname, 'lib')
   },
   module: {
     rules: [
@@ -19,8 +21,9 @@ export default {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
-              localIdentName: '[path][name]__[local]--[hash:base64:5]',
+              modules: {
+                localIdentName: '[path][name]__[local]--[hash:base64:5]'
+              },
               importLoaders: 1
             }
           },
