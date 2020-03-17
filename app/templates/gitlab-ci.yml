@@ -14,7 +14,7 @@ before_script:
   - npm install
 
 lint:
-  stage: list
+  stage: lint
   script:
     - npm run lint
 
@@ -30,15 +30,11 @@ tests:
 publish_npm_production:
   stage: deploy
   script:
-    - npm run build
     - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}'>.npmrc
     - npm publish
   only:
     - master
     - publish-npm-production
-  artifacts:
-    paths:
-      - lib/
 
 pages:
   stage: deploy

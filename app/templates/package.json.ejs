@@ -4,7 +4,8 @@
   "author": "<%= author %>",
   "description": "<%= description %>",
   "scripts": {
-    "build": "NODE_ENV=production rollup -c",
+    "build:lib": "NODE_ENV=production rollup -c",
+    "build:dist": "NODE_ENV=production webpack -p",
     "lint": "eslint src/**/*.{js,jsx,spec.js}",
     "test": "NODE_ENV=test ENV=test jest --config jest.config.json -u --passWithNoTests --detectOpenHandles",
     "test:coverage": "npm test -- --coverage",
