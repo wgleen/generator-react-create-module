@@ -204,11 +204,6 @@ module.exports = class extends Generator {
       this.destinationPath(`${destinationPath}index.js`)
     )
 
-    this.fs.copy(
-      this.templatePath(`${templatePath}store.js`),
-      this.destinationPath(`${destinationPath}store.js`)
-    )
-
     // Src
 
     destinationPath = `${this.appName}/src/`
