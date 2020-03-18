@@ -42,7 +42,8 @@ pages:
     - tests
     - lint
   script:
-    - npm run build
+    - npm run build:lib
+    - npm run build:dist
     - npm run build-storybook
     - npm run test:coverage
     - ls -lah .

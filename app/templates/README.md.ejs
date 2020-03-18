@@ -48,6 +48,7 @@ Documentation
 Set Application variables in the .env file
 - NODE_ENV
 - ENV
+- DEV (changes the development mode for the use of the library) 
 - NPM_TOKEN (token do publish in npm)
 
 ## Initialization
@@ -60,16 +61,32 @@ npm i
 npm run dev
 ```
 
+### Testing library to localhost
+#### Changes the development mode for the use of the library
+
+```bash
+npm run build:lib
+npm run dev:browser
+```
+
 ---
+
 
 ## Build
 
 ### Build library to production
 
 ```bash
-npm run build
+npm run build:lib
 ```
 output path `/lib`
+
+### Build client to production
+
+```bash
+npm run build:dist
+```
+output path `/dist`
 
 ## Storybook
 
@@ -123,7 +140,7 @@ Logged in at NPM with your user
 Build the library
 
 ```bash
-npm run build
+npm run build:lib
 ```
 
 Update package version:
